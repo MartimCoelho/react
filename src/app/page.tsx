@@ -1,20 +1,36 @@
+//page.tsx
 "use client"
-import React, { useState } from "react";
-import Header from "./components/Header";
-import Content from "./components/Content";
-import Footer from "./components/Footer";
-import "./page.module.css";
+import React, { useState, useEffect } from 'react';
+import Header from './components/Header';
+import Content from './components/Content';
+import Footer from './components/Footer';
+import Loader from './components/Loader';
+import './globals.css';
 
-export default function Home() {
-  const [myName] =useState<string>("Martim Ferreira");
-  const [projectName] = useState<string>("League of Heroes");
-  return (
+const Home: React.FC = () => {
+    const [data, setData] = useState({
+        my_name: 'Martim Ferreira',
+        project_name: 'League of Heroes',
+    });
 
-    <div className="app">
-      <Header name={myName} projectName={projectName} />
-      <Content />
-      <Footer name={myName} projectName={projectName} />
-    </div>
-  );
+    const [loading, setLoading] = useState(true); // Estado de loading
+
+    // Simula um carregamento inicial
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false); // Atualiza o estado de loading após 3 segundos
+        }, 3000);
+        return () => clearTimeout(timer); // Limpa o timeout se o componente for desmontado
+    }, []);
+
+    // Renderiza o loader enquanto o estado de loading é true
+    if (loading) {
+        return <Loader />;
+    }
+    return (
+        <div className="App">
+            <Content />
+        </div>
+    );
 };
-
+export default Home;

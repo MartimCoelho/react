@@ -1,18 +1,28 @@
-"use client"
-import React from "react";
-import "../page.module.css";
-import Link from "next/link";
-const Header: React.FC<{ name: string; projectName: string }> = ({ name, projectName }) => {
-  return (
-    <header className="header">
-      <h1>{projectName}</h1>
-      <h3>Desenvolvido por {name}</h3>
-      <nav>
-        <Link href="/" className='nav'>Home</Link>
-        <Link href="/dashboard" className='nav'>Dashboard</Link>
-      </nav>
-    </header>
-  );
+//Header.tsx
+"use clien"
+import React from 'react';
+import Link from 'next/link';
+
+interface HeaderProps {
+    myName: string;
+    projectName: string;
+}
+const Header: React.FC<HeaderProps> = ({ myName, projectName }) => {
+    return (
+        <header>
+            <h1>{projectName}</h1>
+            <h3>Desenvolvido por {myName}</h3>
+            <nav>
+                <ul>
+                    <li>
+                        <Link href="/">Home</Link>
+                    </li>
+                    <li>
+                        <Link href="../dashboard">Dashboard</Link>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    );
 };
 export default Header;
-
